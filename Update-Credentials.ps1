@@ -65,7 +65,8 @@ return
 
 $EncryptedPassword = Write-EncryptedString -InputString $Password -Password $MasterPassword
 
-$file = ".\untitled.xml"
+$config = [xml](gc .\config.xml)
+$file = $config.storeFile
 $xml = [xml](gc $file)
 if(($xml.Untitled.Obj | ?{$_.Title -like $Title}) -eq $null){Write-Host "No entry found with title: $Title" -foregroundcolor "Red"}
 else{
